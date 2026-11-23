@@ -5,14 +5,14 @@
 
 window.WEDDING_DATA = {
   couple: {
-    groom: "Saaid Bashir",
-    bride: "Ayesha Choudhary",
+    groom: "Salman",
+    bride: "Maheen",
     subtitle: "Two Souls <br />One Destiny <br />A Lifetime written by Allah",
   },
 
   wedding: {
-    dateLabel: "24.10.26",
-    dateISO: "2026-10-24T14:00:00+05:30",
+    dateLabel: "30.07.27",
+    dateISO: "2027-07-30T14:00:00+05:30",
     eventTitle: "Walima Celebration",
     invitationNote:
       "Dear Family & Friends,<br />With the grace of Almighty Allah, we cordially invite you to celebrate the Walima ceremony of <strong>Saaid Bashir</strong> & <strong>Ayesha Choudhary</strong> as they unite their lives in love, blessings, and faith.",
@@ -24,16 +24,16 @@ window.WEDDING_DATA = {
   ],
 
   venue: {
-    name: "The Aagaz Resort",
-    address: "Nowgam, Srinagar",
+    name: "Mujgund",
+    address: "HMT Srinagar",
     mapsUrl: "https://share.google/dB7g1H3ZVYxp0CFsR",
   },
 
   rsvp: {
     title: "RSVP",
-    name: "Dr. Bashir ahmad Sanaie",
-    phone: "+91 9419063190",
-    whatsapp: "9419063190",
+    name: "Ronak Bashir",
+    phone: "+91 7889640197",
+    whatsapp: "7889640197",
   },
 
   media: {
