@@ -1,5 +1,5 @@
 /**
- * script.js — Interactive animations, media playback, countdown, and data binding
+ * script.js — Ribbon unfolding intro, music toggle, countdown, and scroll animations
  */
 
 (function () {
@@ -16,111 +16,29 @@
       if (coupleEl && W.couple.groom && W.couple.bride) {
         coupleEl.innerHTML = `${W.couple.groom} <br /><br />${W.couple.bride}`;
       }
-      const subEl = document.getElementById("couple-subtitle");
-      if (subEl && W.couple.subtitle) {
-        subEl.innerHTML = W.couple.subtitle;
+      const taglineEl = document.getElementById("married-tagline");
+      if (taglineEl && W.couple.tagline) {
+        taglineEl.textContent = W.couple.tagline;
       }
     }
 
     if (W.wedding) {
       const evEl = document.getElementById("event-title");
-      if (evEl && W.wedding.eventTitle) evEl.textContent = W.wedding.eventTitle;
-
-      const dateEl = document.getElementById("wedding-date");
-      if (dateEl && W.wedding.dateLabel) dateEl.textContent = W.wedding.dateLabel;
-
-      const invEl = document.getElementById("invitation-note");
-      if (invEl && W.wedding.invitationNote) invEl.innerHTML = W.wedding.invitationNote;
-    }
-
-    if (Array.isArray(W.schedule) && W.schedule.length > 0) {
-      if (W.schedule[0]) {
-        const s0Title = document.getElementById("sched-title-0");
-        const s0Time = document.getElementById("sched-time-0");
-        if (s0Title) s0Title.textContent = W.schedule[0].title;
-        if (s0Time) s0Time.textContent = W.schedule[0].time;
+      if (evEl && W.wedding.eventTitle) {
+        evEl.textContent = W.wedding.eventTitle;
       }
-      if (W.schedule[1]) {
-        const s1Title = document.getElementById("sched-title-1");
-        const s1Time = document.getElementById("sched-time-1");
-        if (s1Title) s1Title.textContent = W.schedule[1].title;
-        if (s1Time) s1Time.textContent = W.schedule[1].time;
+
+      const quoteEl = document.getElementById("closing-quote");
+      if (quoteEl && W.wedding.quote) {
+        quoteEl.innerHTML = W.wedding.quote;
+      }
+
+      const dateEl = document.getElementById("closing-date");
+      if (dateEl && W.wedding.dateLabel) {
+        dateEl.textContent = W.wedding.dateLabel;
       }
     }
 
-    if (W.venue) {
-      const vName = document.getElementById("venue-name-display");
-      const vAddr = document.getElementById("venue-address-display");
-      const mapsBtn = document.getElementById("venue-maps-link");
-      if (vName && W.venue.name) vName.textContent = W.venue.name;
-      if (vAddr && W.venue.address) vAddr.textContent = W.venue.address;
-      if (mapsBtn && W.venue.mapsUrl) mapsBtn.href = W.venue.mapsUrl;
-    }
-
-    // Google Calendar Link
-    const calBtn = document.getElementById("venue-cal-link");
-    if (calBtn && W.couple && W.wedding && W.venue) {
-      try {
-        const start = new Date(W.wedding.dateISO);
-        if (!isNaN(start.getTime())) {
-          const end = new Date(start.getTime() + 5 * 3600 * 1000);
-          const fmt = (dt) => dt.toISOString().replace(/[-:]|\.\d{3}/g, "").slice(0, 15) + "Z";
-          const title = `${W.couple.groom || "Saaid Bashir"} & ${W.couple.bride || "Ayesha Choudhary"} Walima`;
-          const details = W.wedding.invitationNote
-            ? W.wedding.invitationNote.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim()
-            : "Walima Celebration";
-          const location = `${W.venue.name || ""}, ${W.venue.address || ""}`;
-          calBtn.href =
-            `https://calendar.google.com/calendar/render?action=TEMPLATE` +
-            `&text=${encodeURIComponent(title)}` +
-            `&dates=${fmt(start)}/${fmt(end)}` +
-            `&details=${encodeURIComponent(details)}` +
-            `&location=${encodeURIComponent(location)}`;
-        }
-      } catch (_) {}
-    }
-
-    // RSVP Contact Card
-    if (W.rsvp) {
-      const hostName = W.rsvp.name || "Dr. Bashir ahmad Sanaie";
-      const rawPhone = W.rsvp.phone || W.rsvp.whatsapp || "9419063190";
-      const cleanPhone = String(rawPhone).replace(/\D/g, "");
-      const displayPhone = String(rawPhone).startsWith("+")
-        ? rawPhone
-        : cleanPhone.length === 10
-        ? `+91 ${cleanPhone}`
-        : rawPhone;
-      const waNumber = cleanPhone.length === 10 ? `91${cleanPhone}` : cleanPhone;
-      const coupleText = `${W.couple?.groom || "Saaid Bashir"} & ${W.couple?.bride || "Ayesha Choudhary"}`;
-      const waMessage = encodeURIComponent(
-        `Hello ${hostName}, RSVP for the Walima Celebration of ${coupleText}.`
-      );
-
-      const kickerEl = document.getElementById("rsvp-kicker");
-      const nameEl = document.getElementById("reply-title");
-      const phoneTextEl = document.getElementById("rsvp-phone-text");
-      const phoneLinkEl = document.getElementById("rsvp-phone-link");
-      const waBtnEl = document.getElementById("rsvp-whatsapp-link");
-      const callBtnEl = document.getElementById("rsvp-call-link");
-
-      if (kickerEl && W.rsvp.title) kickerEl.textContent = W.rsvp.title;
-      if (nameEl) nameEl.textContent = hostName;
-      if (phoneTextEl) phoneTextEl.textContent = displayPhone;
-      if (phoneLinkEl) {
-        phoneLinkEl.href = `tel:+${waNumber}`;
-        phoneLinkEl.setAttribute("aria-label", `Call ${hostName}`);
-      }
-      if (callBtnEl) {
-        callBtnEl.href = `tel:+${waNumber}`;
-        callBtnEl.setAttribute("aria-label", `Call ${hostName}`);
-      }
-      if (waBtnEl) {
-        waBtnEl.href = `https://wa.me/${waNumber}?text=${waMessage}`;
-        waBtnEl.setAttribute("aria-label", `WhatsApp ${hostName}`);
-      }
-    }
-
-    // Media Sources
     if (W.media) {
       const overlayImg = document.getElementById("weiImg");
       if (overlayImg && W.media.overlayImage) overlayImg.src = W.media.overlayImage;
@@ -143,7 +61,7 @@
   }
 
   /* ------------------------------------------------------------------------
-     2. Envelope Overlay, Wax-Seal Opening Video & Music Toggle
+     2. Ribbon Overlay, Unfolding Video Intro & Music Toggle
      ------------------------------------------------------------------------ */
   function initEnvelopeIntro() {
     const overlay = document.getElementById("weiOverlay");
@@ -262,7 +180,7 @@
     const eventDate =
       W.wedding && W.wedding.dateISO
         ? new Date(W.wedding.dateISO)
-        : new Date(2026, 9, 24, 14, 0, 0);
+        : new Date(2027, 6, 30, 0, 0, 0);
 
     const elDays = document.getElementById("days");
     const elHours = document.getElementById("hours");
@@ -281,7 +199,7 @@
         el.textContent = newVal;
         void el.offsetHeight;
         el.classList.remove("flip-in");
-      }, 520);
+      }, 280);
     }
 
     function tick() {
@@ -335,7 +253,7 @@
             observer.disconnect();
           }
         },
-        { threshold: 0.4 }
+        { threshold: 0.35 }
       );
       observer.observe(container);
     } else {
@@ -349,7 +267,7 @@
   }
 
   /* ------------------------------------------------------------------------
-     4. Scroll-Reveal Animations & Scroll-Driven Schedule Rose
+     4. Scroll-Reveal Animations
      ------------------------------------------------------------------------ */
   function initScrollAnimations() {
     const revealNodes = document.querySelectorAll("[data-reveal]");
@@ -370,61 +288,6 @@
     } else {
       revealNodes.forEach((node) => node.classList.add("is-visible"));
     }
-
-    // Scroll-driven pink peony gliding down the Schedule vertical line
-    const rose = document.getElementById("schedule-rose");
-    const scheduleSection = document.getElementById("schedule-section");
-    if (!rose || !scheduleSection) return;
-
-    // Exact 4-step scroll curve from reference ([scrollPx, translateY])
-    const stops = [
-      [0, 0],
-      [100, 80],
-      [200, 169],
-      [300, 247],
-      [400, 311],
-    ];
-
-    function updateRosePosition() {
-      const secRect = scheduleSection.getBoundingClientRect();
-      // Rose base offset inside schedule section is top: 140px, trigger at 0.5 viewport height
-      const roseInitialTopInViewport = secRect.top + 140;
-      const triggerPoint = window.innerHeight * 0.5;
-      const scrolled = triggerPoint - roseInitialTopInViewport;
-
-      let y = 0;
-      if (scrolled <= 0) {
-        y = 0;
-      } else if (scrolled >= stops[stops.length - 1][0]) {
-        y = stops[stops.length - 1][1];
-      } else {
-        for (let i = 0; i < stops.length - 1; i++) {
-          const [d0, y0] = stops[i];
-          const [d1, y1] = stops[i + 1];
-          if (scrolled >= d0 && scrolled <= d1) {
-            const t = (scrolled - d0) / (d1 - d0);
-            y = y0 + t * (y1 - y0);
-            break;
-          }
-        }
-      }
-      rose.style.transform = `translate3d(0, ${y.toFixed(2)}px, 0)`;
-    }
-
-    let ticking = false;
-    function onScroll() {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          updateRosePosition();
-          ticking = false;
-        });
-        ticking = true;
-      }
-    }
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll, { passive: true });
-    updateRosePosition();
   }
 
   /* ------------------------------------------------------------------------
