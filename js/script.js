@@ -33,6 +33,11 @@
         quoteEl.innerHTML = W.wedding.quote;
       }
 
+      const heroDateEl = document.getElementById("hero-date");
+      if (heroDateEl && W.wedding.dateLabel) {
+        heroDateEl.textContent = W.wedding.dateLabel;
+      }
+
       const dateEl = document.getElementById("closing-date");
       if (dateEl && W.wedding.dateLabel) {
         dateEl.textContent = W.wedding.dateLabel;
